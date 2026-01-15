@@ -1,0 +1,97 @@
+# Hugo 构建输出目录（核心）
+# public/ 是 Hugo 默认的构建输出目录，包含最终生成的静态网站文件
+public/
+# 如果使用了自定义的发布目录（比如 docs/），也需要添加
+docs/
+
+# Hugo 缓存目录
+# resources/ 是 Hugo 缓存资源（如处理后的图片、SCSS 编译结果）的目录
+resources/
+# hugo_stats.json 是 Hugo 生成的统计文件
+hugo_stats.json
+
+# Hugo 临时文件
+*.hugo_build.lock
+
+# 主题相关（可选）
+# 如果主题是通过 git submodule 引入的，不需要忽略；如果是直接下载的，可取消注释
+# themes/
+
+# 操作系统相关文件
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# 编辑器/IDE 配置文件
+# VS Code
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+.*.sw?
+.un~
+.session
+.netrwhist
+autoload/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list/
+tramp/
+.//.DS_Store
+
+# 依赖管理（如果使用了 npm/yarn 管理前端依赖）
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# 日志文件
+*.log
