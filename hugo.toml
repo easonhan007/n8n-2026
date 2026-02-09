@@ -15,11 +15,11 @@ darkTheme = "forest"
 
 # images = ["img/global-background.jpg"]
 
+description = "世界太复杂，从拖拽重新开始。 最实用的中文教程 × 真实工作流模板 × 汉化/部署方案 让重复劳动变成“AI员工”"
 author = "乙醇"
-description = "n8n中文教程站点"
 avatar = "img/logo.jpg"
-headerTitle = "n8n中文教程站点"
-motto = "世界太复杂，从新出发。"
+headerTitle = "n8n中文教程 · 社区 "
+motto = "把复杂的世界拆成节点，从0开始重新连接"
 
 # footerBottomText = ""
 
