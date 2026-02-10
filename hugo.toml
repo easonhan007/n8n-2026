@@ -1,5 +1,5 @@
 languageCode = "zh-Hans"
-baseURL = 'https://example.org/'
+baseURL = 'n8n://ethanhan.cc/'
 title = 'n8n中文教程站点'
 theme = "dream"
 defaultContentLanguage = "zh"
@@ -63,3 +63,8 @@ showPrevNextPost = true
 # jsDateFormat = "yyyy年MM月dd日"
 # lightTheme = "emerald"
 # darkTheme = "forest"
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.renderer]
+unsafe = true

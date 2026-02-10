@@ -25,6 +25,16 @@ n8n如何直接调用playwright进行高级的爬虫操作。
 
 <!--more-->
 
+## 视频地址
+
+- [B站](https://www.bilibili.com/video/BV1P9FQzME19/)
+<iframe  width="560" height="315"  src="//player.bilibili.com/player.html?isOutside=true&aid=116045872373159&bvid=BV1P9FQzME19&cid=35962685230&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+
+- [YouTube](https://www.youtube.com/watch?v=17rrkWWIzI0)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/17rrkWWIzI0?si=PvIjsc6hZIrX1sPQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## 正文
+
 先来看一下问题，我们用http请求节点去访问电影[千与千寻的豆瓣首页](https://movie.douban.com/subject/1291561/)，我们只能得到一串js代码，而不是页面的html。
 
 这是因为电影的浏览页在打开之前，会有js的检验，保证只有真正的浏览器才能访问这个页面，可能是一种反爬虫的手段。
@@ -183,6 +193,110 @@ url里面我们填入`https://movie.douban.com/subject/1291561/`，until里填�
 
 简单说，只要一个工具能对外提供 HTTP 服务，n8n 基本都能跟它接上。不管是 API 还是 Webhook，只要能联网、能调接口，n8n 就能把它拉进你的自动化工作流里一起干活
 
-```
+## 流程代码
 
+直接复制粘贴到n8n就可以用了。
+
+```json
+{
+  "name": "n8n+playwright",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=http://host.orb.internal:8000/fetch-html?url=https://movie.douban.com/subject/1291561/",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "https://movie.douban.com/subject/1291561/"
+            },
+            {
+              "name": "until",
+              "value": ".article"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [224, 0],
+      "id": "a05d37c0-3e87-43be-b1a0-15c5580697d4",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "name",
+              "cssSelector": "h1 > span"
+            },
+            {
+              "key": "score",
+              "cssSelector": ".rating_num"
+            },
+            {
+              "key": "comments",
+              "cssSelector": ".short",
+              "returnArray": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [432, 0],
+      "id": "dd402594-01b9-452b-9b8d-712898b5b406",
+      "name": "HTML"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "id": "770dd1fa-952a-4cab-9d45-aa69c8a63c30",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "39325569-d548-4b1e-8de2-b9705cfe12d4",
+  "meta": {
+    "instanceId": "05918ff9c9ba7e7e6f5df0c8be162624879238b4c06e5881f0af695749866d92"
+  },
+  "id": "UW2MXJGdu3BzdnJUBJ3mE",
+  "tags": []
+}
 ```
